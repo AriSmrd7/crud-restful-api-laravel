@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,17 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CategoryRequest $request)
     {
-        //
+        $params = $request->validated();
+        if ($category = Category::create($params)) {
+
+            return response()->json([
+                'status' => true,
+                'message' => "Kategori baru berhasil ditambahkan",
+                'categories' => $category
+            ], 200);        
+        }
     }
 
     /**
@@ -50,7 +59,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::find($id);
+        return response()->json([
+            'categories' => $category
+        ]);
     }
 
     /**
