@@ -110,6 +110,15 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->categories()->detach();
+        $product->images()->detach();
+
+        if ($product->delete()) {
+            return response()->json([
+                'status' => true,
+                'message' => "Produk berhasil dihapus",
+            ], 200);        
+        }
     }
 }
