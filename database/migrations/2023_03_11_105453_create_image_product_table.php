@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_image', function (Blueprint $table) {
+        Schema::create('image_product', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('image_id')->unsigned();
             $table->integer('product_id')->unsigned();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_image');
+        Schema::dropIfExists('image_product');
     }
 };
