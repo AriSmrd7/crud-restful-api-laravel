@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -14,8 +15,12 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        $images = Image::all();
+        return response()->json([
+            'images' => $images
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -46,7 +51,10 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        //
+        $image = Image::find($id);
+        return response()->json([
+            'image' => $image
+        ]);
     }
 
     /**
