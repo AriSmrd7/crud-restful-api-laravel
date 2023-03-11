@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImageRequest;
 use App\Models\Image;
 use Illuminate\Http\Request;
 
@@ -38,9 +39,17 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageRequest $request)
     {
-        //
+        $params = $request->validated();
+        if ($image = Image::create($params)) {
+
+            return response()->json([
+                'status' => true,
+                'message' => "Gambar baru berhasil ditambahkan",
+                'image' => $image
+            ], 200);        
+        }
     }
 
     /**
@@ -75,9 +84,9 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageRequest $request, $id)
     {
-        //
+
     }
 
     /**
