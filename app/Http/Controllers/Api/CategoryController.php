@@ -27,7 +27,18 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(CategoryRequest $request)
+    public function create()
+    {
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CategoryRequest $request)
     {
         $params = $request->validated();
         if ($category = Category::create($params)) {
@@ -38,17 +49,6 @@ class CategoryController extends Controller
                 'categories' => $category
             ], 200);        
         }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
