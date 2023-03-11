@@ -106,6 +106,13 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = Image::findOrFail($id);
+
+        if ($image->delete()) {
+            return response()->json([
+                'status' => true,
+                'message' => "Gambar berhasil di hapus",
+            ], 200);        
+        }
     }
 }
