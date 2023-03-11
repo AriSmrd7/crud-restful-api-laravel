@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::with(['categories','images'])->get();
+        return response()->json([
+            'products' => $products
+        ]);
     }
 
     /**
@@ -46,7 +50,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $products = Product::with(['categories','images'])->get()->find($id);
+        return response()->json([
+            'products' => $products
+        ]);
     }
 
     /**
