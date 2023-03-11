@@ -83,11 +83,19 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
-    }
+        $category = Category::findOrFail($id);
+        $params = $request->validated();
 
+        if ($category->update($params)) {
+            return response()->json([
+                'status' => true,
+                'message' => "Kategori berhasil di update",
+                'category' => $category
+            ], 200);        
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
