@@ -86,7 +86,16 @@ class ImageController extends Controller
      */
     public function update(ImageRequest $request, $id)
     {
+        $image = Image::findOrFail($id);
+        $params = $request->validated();
 
+        if ($image->update($params)) {
+            return response()->json([
+                'status' => true,
+                'message' => "Gambar berhasil di update",
+                'image' => $image
+            ], 200);        
+        }
     }
 
     /**
